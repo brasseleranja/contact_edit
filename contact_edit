@@ -1,37 +1,30 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Kontaktformular Weiterleitung</title>
-<script>
-window.onload = function () {
-  const params = new URLSearchParams(window.location.search);
-  const accountid = params.get("accountid");
-  const accountname = params.get("accountname");
+  <meta charset="UTF-8">
+  <title>Besuchsbericht Weiterleitung</title>
+  <script>
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
 
-  if (!accountid || !accountname) {
-    document.body.innerHTML = "❌ Fehlende Parameter: accountid oder accountname.";
-    return;
-  }
+      if (!id) {
+        document.body.innerHTML = "❌ Fehlender Parameter: id.";
+        return;
+      }
 
-  // Ziel-URL für das Dynamics 365-Kontaktformular
-  const zielUrl = "https://kometdentallive.crm4.dynamics.com/main.aspx" +
-    "?appid=53ef3462-a446-f011-877a-000d3ab2b09a" +
-    "&pagetype=entityrecord" +
-    "&etn=contact" +
-    "&formid=ebdb15ca-0195-4747-90f0-9eec45804ba1" +
-    "&extraqs=" +
-    encodeURIComponent("parentcustomerid=" + accountid) +
-    "%26" + encodeURIComponent("parentcustomeridname=" + accountname) +
-    "%26" + encodeURIComponent("parentcustomeridtype=account");
+      // Ziel-URL zur bras_besuchsbericht-Seite mit dynamischer ID
+      const zielUrl = "https://kometdentallive.crm4.dynamics.com/main.aspx" +
+        "?appid=53ef3462-a446-f011-877a-000d3ab2b09a" +
+        "&pagetype=entityrecord" +
+        "&etn=bras_besuchsbericht" +
+        "&id=" + encodeURIComponent(id);
 
-  // Weiterleiten
-  window.location.href = zielUrl;
-};
-</script>
+      window.location.href = zielUrl;
+    };
+  </script>
 </head>
 <body>
-<p>🔄 Bitte warten – das Kontaktformular wird geladen ...</p>
+  <p>🔄 Bitte warten – der Besuchsbericht wird geladen ...</p>
 </body>
 </html>
